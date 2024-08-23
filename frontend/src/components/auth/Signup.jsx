@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'sonner';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '@/redux/authSlice';
+import { Loader2 } from 'lucide-react';
 
 
 
@@ -169,7 +170,7 @@ const Signup = () => {
           </div>
          
           {
-            loading ? <button className='w-full px-4 py-2' ><Loader2 className='mr-2 h-4 w-4 animate-spin'/>plese wait.  </button> :
+            loading ? <button className='w-full px-4 py-2 flex items-center' ><Loader2 className='mr-2 h-4 w-4 animate-spin'/>plese wait.  </button> :
             <button
             type="submit"
             className="w-full px-4 py-2 text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700 focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50"

@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from './shared/Navbar'
 import { Avatar, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import { Contact2, Mail, Pen } from 'lucide-react'
 import { Badge } from './ui/badge'
 import ApplidJobsTable from './ApplidJobsTable'
+import UpdateProfile from './UpdateProfile'
+import { useSelector } from 'react-redux'
+const skills = ['Html', 'Css', 'JavaScript', 'React'];
+    const isResume = true;
 
 const Profile = () => {
-
-    const skills = ['Html', 'Css', 'JavaScript', 'React'];
-    const isResume = true;
+    
+    const [open , setOpen] = useState(false);
+    const {user} = useSelector(store=>store.auth);
 
     return (
     <div>
@@ -19,17 +23,17 @@ const Profile = () => {
             <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center gap-4">
                     <Avatar className="h-28 w-28 rounded-full shadow-md">
-                        <AvatarImage src="https://cdn.logojoy.com/wp-content/uploads/2018/05/01104813/1268-768x591.png" />
+                        <AvatarImage src={user?.profile?.profileImg} />
                     </Avatar>
                     <div>
-                        <h1 className="font-semibold text-2xl text-gray-800">Full Name</h1>
+                        <h1 className="font-semibold text-2xl text-gray-800">{user?.fullname}</h1>
                         <p className="text-sm text-gray-600">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. In optio assumenda voluptate?
+                      {user?.profile?.bio}
                         </p>
                     </div>
                 </div>
                 <div className="flex items-center">
-                    <Button className="rounded-full border border-gray-300 hover:bg-gray-100 focus:outline-none" variant="outline" size="icon">
+                    <Button onClick={()=> setOpen(true)} className="rounded-full border border-gray-300 hover:bg-gray-100 focus:outline-none" variant="outline" size="icon">
                         <Pen className="w-5 h-5 text-gray-600" />
                     </Button>
                 </div>
@@ -38,19 +42,19 @@ const Profile = () => {
             <div className="mx-4">
                 <div className="flex gap-4 items-center mx-4 my-4 text-gray-700">
                     <Mail className="w-5 h-5 text-blue-500" />
-                    <p>example@gmail.com</p>
+                    <p>{user?.email}</p>
                 </div>
                 <div className="flex gap-4 items-center mx-4 my-4 text-gray-700">
                     <Contact2 className="w-5 h-5 text-blue-500" />
-                    <p>6263715063</p>
+                    <p>{user?.phoneNo}</p>
                 </div>
             </div>
 
             <div className="m-4 py-4 border-t border-gray-200">
                 <h1 className="font-bold text-xl text-gray-800 mb-4">Skills</h1>
                 <div className="flex flex-wrap gap-3">
-                    {skills.length !== 0 ? (
-                        skills.map((skill, index) => (
+                    {user?.profile?.skills.length !== 0 ? (
+                        user?.profile?.skills.map((skill, index) => (
                             <Badge key={index} className="text-sm px-3 py-1 bg-blue-100 text-blue-700 rounded-full">
                                 {skill}
                             </Badge>
@@ -64,8 +68,8 @@ const Profile = () => {
             <div className="m-4 py-4 border-t border-gray-200">
                 <label className="text-lg font-bold text-gray-800 mb-2">Resume</label>
                 {isResume ? (
-                    <a href="#" className="text-blue-600 hover:text-blue-800 hover:underline" target="_blank" rel="noopener noreferrer">
-                        My Resume
+                    <a href={user?.profile?.resume} className="text-blue-600 pl-4 hover:text-blue-800 hover:underline" target="_blank" rel="noopener noreferrer">
+                        {user?.profile?.resumeOrignalName}
                     </a>
                 ) : (
                     <span className="text-gray-500">NA</span>
@@ -77,6 +81,7 @@ const Profile = () => {
             <h1 className="font-bold text-xl text-gray-800 mb-4">Applied Jobs</h1>
             <ApplidJobsTable />
         </div>
+        <UpdateProfile open={open} setOpen={setOpen} />
     </div>
 </div>
 )

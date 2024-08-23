@@ -1,6 +1,8 @@
 import { User } from "../models/user.js";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import getDataUri from "../utils/datauri.js";
+import cloudinary from "../utils/cloudindury.js";
 
 export const register = async(req,res)=>{
     try {
@@ -12,7 +14,12 @@ export const register = async(req,res)=>{
                 success:false
             })
         }
-        console.log(fullname , email , password , phoneNo , role)
+
+        const file = req.file;
+        const fileUrl = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUrl.content);
+
+
         const user = await User.findOne({email});
         if(user){
             return res.status(400).json({
@@ -28,7 +35,10 @@ export const register = async(req,res)=>{
             email,
             phoneNo ,
             password:hashPassword,
-            role
+            role,
+            profile :{
+                profileImg:cloudResponse.secure_url,
+            }
         })
         
         return res.status(201).json({
@@ -122,8 +132,10 @@ export const logout = async(req,res)=>{
 export const updateProfile = async(req,res)=>{
     try {
         const { fullname,email , phoneNo  , bio , skills} = req.body;
+  
         const file = req.file;
-
+        const fileUrl = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUrl.content);
        
 
 
@@ -149,6 +161,10 @@ export const updateProfile = async(req,res)=>{
         if(bio)user.profile.bio = bio
         if(skills)user.profile.skills = skillsArray
        
+        if(cloudResponse){
+            user.profile.resume = cloudResponse.secure_url // save in cloudindury 
+            user.profile.resumeOrignalName = file.originalname
+        }  
         
 
         await user.save();

@@ -7,7 +7,7 @@ const router = Router();
 
 router.post('/register' , singleUpload, register);
 router.post('/login' , login);
-router.post('/profile/update' ,isAutherized, updateProfile);
+router.post('/profile/update' ,isAutherized,singleUpload, updateProfile);
 router.get('/logout' , logout)
 
 export default router;
