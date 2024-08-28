@@ -51,7 +51,7 @@ const Navbar = () => {
               user && user.role === 'recruiter' ? (
                 <>
                   <div className='px-2 py-1 '><a href="/admin/companies">Companies</a></div>
-                  <div className='px-2 py-1'> <a href="/jobs">Jobs</a></div>
+                  <div className='px-2 py-1'> <a href="/admin/jobs">Jobs</a></div>
                 </>
               ) : (
                 <>

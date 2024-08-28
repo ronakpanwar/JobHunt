@@ -9,11 +9,14 @@ import axios from 'axios'
 import { CREATE_COMPANY_API } from '../utils/constant'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import useGetCompanyById from '@/hooks/useGetCompanyById'
 
 const SetUpCompany = () => {
+    const params = useParams()
+    useGetCompanyById(params.id);
 
     const {singleCompany} = useSelector(store=>store.company);
-    const params = useParams()
+    
     const navigate = useNavigate()
     const [loading , setLoading]  = useState(false)
 
@@ -94,8 +97,8 @@ const SetUpCompany = () => {
                 <form  onSubmit={handleSubmit}>
                     <div className=' flex gap-10'>
 
-                        <Button variant='outline' className="flex gap-5 p-4 items-center " >
-                            <ArrowBigLeftIcon />
+                        <Button variant='outline' onClick={()=> navigate(`/admin/companies`)} className="flex gap-5 p-4 items-center " >
+                            <ArrowBigLeftIcon  />
                             <span>Back</span>
                         </Button>
                         <h1 className='font-bold text-2xl'>Company SetUp</h1>

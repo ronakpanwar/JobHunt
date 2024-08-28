@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 
 
 
-const getCompanyById = (companyId) => {
+const useGetCompanyById = (companyId) => {
  const params = useParams();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -17,7 +17,9 @@ const getCompanyById = (companyId) => {
 
                 const res = await axios.get(`${CREATE_COMPANY_API}/get/${companyId}`, { withCredentials: true })
                 if (res.data.success) {
+
                     dispatch(setSingleCompany(res.data.company));
+                    
 
                 }
             } catch (error) {
@@ -29,4 +31,4 @@ const getCompanyById = (companyId) => {
     }, [companyId , dispatch])
 }
 
-export default getCompanyById
+export default useGetCompanyById

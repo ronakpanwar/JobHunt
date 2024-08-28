@@ -9,20 +9,20 @@ import { CREATE_COMPANY_API } from '../utils/constant'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-const ListOfCompany = () => {
-    const { companies, filterCompanyByText } = useSelector(store => store.company);
+const AdminJobTable = () => {
+  const {allAdminJobs , searchJobByText} = useSelector(store=>store.job)
     const navigate = useNavigate();
-    const [filterCompany, setFilterCompany] = useState(companies);
+    const [filterJobs, setFilterJobs] = useState(allAdminJobs);
 
     useEffect(() => {
-        const filterText = companies.length >= 0 && companies.filter((company) => {
-            if (!filterCompanyByText) {
+        const filterText = allAdminJobs.length >= 0 && allAdminJobs.filter((job) => {
+            if (!searchJobByText) {
                 return true
             }
-            return company?.name?.toLowerCase().includes(filterCompanyByText.toLowerCase());
+            return job?.title?.toLowerCase().includes(searchJobByText.toLowerCase());
         })
-        setFilterCompany(filterText);
-    }, [filterCompanyByText, companies])
+        setFilterJobs(filterText);
+    }, [searchJobByText, allAdminJobs])
 
     return (
         <div>
@@ -30,23 +30,21 @@ const ListOfCompany = () => {
                 <TableCaption>A list of your Companies</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Logo</TableHead>
-                        <TableHead>Name</TableHead>
+                        <TableHead>Company Name</TableHead>
+                        <TableHead>Role</TableHead>
                         <TableHead>Date</TableHead>
                         <TableHead className="text-right">Action</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {
-                      filterCompany?.map((c) => (
+                      filterJobs?.map((job) => (
                             <tr>
                                 <TableCell>
-                                    <Avatar>
-                                        <AvatarImage src={c.logo} alt={`${c.name} logo`} />
-                                    </Avatar>
+                                    {job?.company?.name}
                                 </TableCell>
-                                <TableCell>{c.name}</TableCell>
-                                <TableCell>{c.createdAt.split("T")[0]}</TableCell>
+                                <TableCell>{job.title}</TableCell>
+                                <TableCell>{job.createdAt.split("T")[0]}</TableCell>
                                 <TableCell className="text-right">
                                     <Popover>
                                         <PopoverTrigger>
@@ -71,4 +69,4 @@ const ListOfCompany = () => {
     );
 }
 
-export default ListOfCompany
+export default AdminJobTable

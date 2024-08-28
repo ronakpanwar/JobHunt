@@ -7,15 +7,18 @@ import { useNavigate } from 'react-router-dom'
 import useGetAllCompanies from '@/hooks/useGetAllCompanies'
 import { useDispatch } from 'react-redux'
 import { setFilterCompanyByText } from '@/redux/companySlice'
+import AdminJobTable from './AdminJobTable'
+import useAdminAllJob from '@/hooks/useAdminAllJobs'
+import { setSearchJobByText } from '@/redux/jobSlice'
 
-const Companies = () => {
-  useGetAllCompanies();
+const AdminJobs = () => {
+  useAdminAllJob();
   const navigate = useNavigate();
   const [input , setInput] = useState("");
   const dispatch  = useDispatch();
 
   useEffect(()=>{
-     dispatch(setFilterCompanyByText(input));
+     dispatch(setSearchJobByText(input));
   },[input])
 
   return (
@@ -28,14 +31,14 @@ const Companies = () => {
            placeholder='Filter by name'
            onChange={(e)=>setInput(e.target.value)}
            />
-          <Button onClick={() => navigate('/admin/companies/create')} className='my-2 bg-violet-600 hover:bg-violet-700'  >Add Company</Button>
+          <Button onClick={() => navigate('/admin/jobs/create')} className='my-2 bg-violet-600 hover:bg-violet-700'  >Add Job</Button>
         </div>
         <div>
-          <ListOfCompany />
+          <AdminJobTable/>
         </div>
       </div>
     </div>
   )
 }
 
-export default Companies
+export default AdminJobs
