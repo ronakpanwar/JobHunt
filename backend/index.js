@@ -18,6 +18,7 @@ app.use(cookieParser());
 
 const  corsOptions  = {
     origin:"https://job-hunt-topaz-omega.vercel.app",
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials:true
 }
 app.use(cors(corsOptions));
