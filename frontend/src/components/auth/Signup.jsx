@@ -51,7 +51,7 @@ const Signup = () => {
     }
     try {
       dispatch(setLoading(true))
-         const res = await axios.post(`https://job-hunt-topaz-omega.vercel.app/api/user/register` , formData ,{
+         const res = await axios.post(`https://job-hunt-api.vercel.app/api/user/register` , formData ,{
           headers:{
             "Content-Type":"multipart/form-data"
           },
