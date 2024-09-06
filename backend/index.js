@@ -23,6 +23,8 @@ const  corsOptions  = {
 app.use(cors(corsOptions));
 
 // all apis
+app.use('/' , (req,res)=>{
+    res.json('hello')});
 app.use('/api/user' , userRoute);
 app.use('/api/company' , companyRoute );
 app.use('/api/job', jobRoute )
