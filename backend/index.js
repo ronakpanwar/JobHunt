@@ -29,7 +29,7 @@ app.use('/api/job', jobRoute )
 app.use('/api/application' , applicationRoute)
 
 
-const port = process.env.PORT || 3000
+const port =  3000
 
 
 app.listen(port , ()=>{
