@@ -3,7 +3,7 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Badge } from '../ui/badge'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
-import { Edit2, MoreHorizontal } from 'lucide-react'
+import { Edit2, Eye, MoreHorizontal } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { CREATE_COMPANY_API } from '../utils/constant'
 import axios from 'axios'
@@ -52,10 +52,17 @@ const AdminJobTable = () => {
                                         </PopoverTrigger>
                                         <PopoverContent className="w-32">
                                             <div className='flex items-center gap-2 w-fit cursor-pointer' 
-                                            onClick={()=>navigate(`/admin/companies/${c._id}`)}
+                                            onClick={()=>navigate(`/admin/companies/${job._id}`)}
                                             >
                                                 <Edit2 className='w-4' />
                                                 <span >Edit</span>
+                                            </div>
+                                            <div className='flex items-center gap-2 w-fit cursor-pointer' 
+                                            onClick={()=>navigate(`/admin/jobs/${job._id}/applicents`)}
+                                            >
+                                              <Eye className='w-4 mt-2'/>
+                                              <span>Applicants</span>
+
                                             </div>
                                         </PopoverContent>
                                     </Popover>
