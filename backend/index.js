@@ -17,22 +17,21 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 const  corsOptions  = {
-    origin:"ttp://localhost:5173",
+    origin:"http://localhost:5173",
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials:true
 }
 app.use(cors(corsOptions));
 
 // all apis
-app.use('/' , (req,res)=>{
-    res.json('hello')});
+
 app.use('/api/user' , userRoute);
 app.use('/api/company' , companyRoute );
 app.use('/api/job', jobRoute )
 app.use('/api/application' , applicationRoute)
 
 
-const port =  3000
+const port = 3000
 
 
 app.listen(port , ()=>{
