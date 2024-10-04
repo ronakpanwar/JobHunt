@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 const  corsOptions  = {
-    origin:"https://job-hunt-topaz-omega.vercel.app",
+    origin:"ttp://localhost:5173",
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials:true
 }
