@@ -24,6 +24,9 @@ const  corsOptions  = {
 app.use(cors(corsOptions));
 
 // all apis
+app.use('/', (req,res)=>{
+  res.send('Hello');
+})
 
 app.use('/api/user' , userRoute);
 app.use('/api/company' , companyRoute );
