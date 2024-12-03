@@ -25,7 +25,7 @@ app.use(cors(corsOptions));
 
 // all apis
 app.use('/', (req,res)=>{
-  res.send('Hello');
+  res.json('Hello');
 })
 
 app.use('/api/user' , userRoute);
