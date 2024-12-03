@@ -41,34 +41,34 @@ const Navbar = () => {
 
   return (
     <>
-      <div className='p-2 flex items-center justify-around'>
-        <div className='p-2 font-bold text-3xl'>
+      <div className='p-2 flex items-center justify-between text-sm md:text-xl md:justify-around'>
+        <div className='p-2 font-bold text-xl md:text-3xl'>
           <h1 className=''>Job<span className='text-orange-600'>Hunt</span></h1>
         </div>
-        <div className='flex justify-between'>
-          <div className='flex items-center text-xl gap-6 font-bold' >
+        <div className='flex justify-between '>
+          <div className='flex items-center text-sm md:text-xl md:gap-6 gap-1 font-bold' >
             {
               user && user.role === 'recruiter' ? (
                 <>
-                  <div className='px-2 py-1 '><a href="/admin/companies">Companies</a></div>
-                  <div className='px-2 py-1'> <a href="/admin/jobs">Jobs</a></div>
+                  <div className='md:px-2 px-1 py-1 '><a href="/admin/companies">Companies</a></div>
+                  <div className='md:px-2 px-1 py-1'> <a href="/admin/jobs">Jobs</a></div>
                 </>
               ) : (
                 <>
-                  <div className='px-2 py-1 '><a href="/">Home</a></div>
-                  <div className='px-2 py-1'> <a href="/jobs">Jobs</a></div>
-                  <div className='px-2 py-1'><a href="/browse">Browse</a></div>
+                  <div className='md:px-2 px-1 py-1 '><a href="/">Home</a></div>
+                  <div className='md:px-2 px-1 py-1'> <a href="/jobs">Jobs</a></div>
+                  {/* <div className='md:px-2 px-1 py-1'><a href="/browse">Browse</a></div> */}
                 </>
               )
             }
 
           </div>
-          <div className='flex items-center text-xl mx-10' >
+          <div className='flex items-center text-xl md:mx-10 mx-2' >
             {
               !user ? (
-                <div className=''>
-                  <Link to='/login' ><Button className="mx-2" variant="outline">Login</Button></Link>
-                  <Link to="/signup" ><Button className="mx-2 bg-violet-600 hover:bg-violet-700" >SignUp</Button></Link>
+                <div className='flex'>
+                  <Link to='/login' ><Button className="md:mx-2 text-sm  " variant="outline">Login</Button></Link>
+                  <Link to="/signup" ><Button className="md:mx-2 text-sm bg-violet-600 hover:bg-violet-700" >SignUp</Button></Link>
                 </div>
               ) : (
                 <Popover>
@@ -81,7 +81,7 @@ const Navbar = () => {
                     <div className=''>
                       <div className='flex gap-4 my-1 items-center'>
                         <Avatar>
-                          <AvatarImage src={user?.profile?.profileImg} />
+                          <AvatarImage src={user?.profile?.profileImg || "/default-avatar.jpg"} />
                         </Avatar>
                         <div className='flex flex-col '>
                           <h1 className=''>{user?.fullname}</h1>

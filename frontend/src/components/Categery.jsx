@@ -21,7 +21,7 @@ const Categery = () => {
 
     return (
         <div>
-            <Carousel className="w-full max-w-4xl mx-auto my-20 relative">
+            <Carousel className=" w-full max-w-4xl mx-auto my-20 relative">
                 <CarouselContent className="flex gap-4 px-4 py-6">
                     {
                         category.map((c, index) => (
