@@ -17,16 +17,16 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 const  corsOptions  = {
-    origin:"https://job-hunt-new-ui.vercel.app",
+    origin:"http://localhost:5173",
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials:true
 }
 app.use(cors(corsOptions));
 
 // all apis
-app.use('/', (req,res)=>{
-  res.json('Hello');
-})
+// app.use('/', (req,res)=>{
+//   res.json('Hello');
+// })
 
 app.use('/api/user' , userRoute);
 app.use('/api/company' , companyRoute );

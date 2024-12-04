@@ -9,13 +9,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://job-hunt-mocha-eta.vercel.app',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
+ 
 });
